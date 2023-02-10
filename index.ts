@@ -1,8 +1,14 @@
 import { io } from "socket.io-client"
 
-const socket = io("http://localhost:81")
+const socket = io("https://masterapi.legab.ninja")
 
 socket.on("connect", () => {
     console.log("connected")
-    socket.emit("create_game", { name: "test" })
+    socket.on("message", () => {
+        console.log("message")
+    })
+
+    socket.on("switch", (data) => {
+        console.log(data)
+    })
 })
