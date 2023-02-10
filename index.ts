@@ -1,14 +1,12 @@
-import { Gpio } from "pigpio"
+import { Gpio } from "onoff"
 import { io } from "socket.io-client"
 
-var relay = new Gpio(21, {
-    mode: Gpio.OUTPUT,
-})
+var relay = new Gpio(21, "high")
 
-var state = 0
+var state: 0 | 1 = 0
 
 setInterval(() => {
-    relay.digitalWrite(state)
+    relay.writeSync(state)
     state = state ? 0 : 1
 }, 1000)
 
