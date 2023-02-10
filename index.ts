@@ -1,4 +1,7 @@
+import { Gpio } from "onoff"
 import { io } from "socket.io-client"
+
+var led = new Gpio(21, "out")
 
 const socket = io("https://masterapi.legab.ninja")
 
@@ -9,6 +12,13 @@ socket.on("connect", () => {
     })
 
     socket.on("switch", (data) => {
-        console.log(data)
+        switch (data) {
+            case "on":
+                led.writeSync(1)
+                break
+            case "off":
+                led.writeSync(0)
+                break
+        }
     })
 })
