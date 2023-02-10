@@ -15,9 +15,11 @@ socket.on("connect", () => {
         switch (data) {
             case "on":
                 led.writeSync(1)
+                console.log("on")
                 break
             case "off":
                 led.writeSync(0)
+                console.log("off")
                 break
         }
     })
