@@ -23,8 +23,12 @@ const init = async () => {
     const update = () => {
         relay.writeSync(state)
     }
-    socket.on("connect", () => {
+    socket.on("connect", async () => {
         console.log("connected")
+
+        relay.writeSync(1)
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+        relay.writeSync(0)
 
         socket.on("request_state", () => {
             socket.emit("return_state", state)
