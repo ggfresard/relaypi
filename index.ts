@@ -7,8 +7,9 @@ var state: 0 | 1 = 0
 
 setInterval(() => {
     relay.writeSync(state)
+    console.log(state)
     state = state ? 0 : 1
-}, 1000)
+}, 500)
 
 const socket = io("https://masterapi.legab.ninja")
 
