@@ -4,18 +4,13 @@ import { io } from "socket.io-client"
 var relay = new Gpio(21, {
     mode: Gpio.OUTPUT,
 })
-var pwm = new Gpio(12, {
-    mode: Gpio.OUTPUT,
-})
 
-relay.digitalWrite(1)
+var state = 0
 
-console.log("on")
-
-setTimeout(() => {
-    relay.digitalWrite(0)
-    console.log("off")
-}, 4000)
+setInterval(() => {
+    relay.digitalWrite(state)
+    state = state ? 0 : 1
+}, 1000)
 
 const socket = io("https://masterapi.legab.ninja")
 
