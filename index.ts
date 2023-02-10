@@ -1,5 +1,6 @@
 import { Gpio } from "onoff"
 import { io } from "socket.io-client"
+import dns from "dns"
 
 var relay = new Gpio(21, "high")
 
@@ -8,11 +9,7 @@ var state: 0 | 1 = 0
 relay.writeSync(state)
 
 var checker = setInterval(async () => {
-    if (
-        !!(await require("dns")
-            .promises.resolve("google.com")
-            .catch(() => {}))
-    ) {
+    if (!!(await dns.promises.resolve("google.com").catch(() => {}))) {
         init()
         clearInterval(checker)
     } else {
