@@ -10,10 +10,11 @@ var pwm = new Gpio(12, {
 
 relay.digitalWrite(1)
 
-pwm.pwmWrite(100)
+console.log("on")
 
 setTimeout(() => {
-    pwm.pwmWrite(0)
+    relay.digitalWrite(0)
+    console.log("off")
 }, 4000)
 
 const socket = io("https://masterapi.legab.ninja")
