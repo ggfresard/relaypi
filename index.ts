@@ -3,7 +3,7 @@ import { io } from "socket.io-client"
 
 var relay = new Gpio(21, "high")
 
-var state: 0 | 1 = 0
+relay.writeSync(0)
 
 const socket = io("https://masterapi.legab.ninja")
 
