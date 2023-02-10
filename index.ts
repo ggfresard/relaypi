@@ -15,6 +15,8 @@ var checker = setInterval(async () => {
     ) {
         init()
         clearInterval(checker)
+    } else {
+        console.log("no internet")
     }
 }, 1000)
 
