@@ -1,12 +1,20 @@
-import { Gpio } from "onoff"
+import { Gpio } from "pigpio"
 import { io } from "socket.io-client"
 
-var relay = new Gpio(21, "out")
-var pwm = new Gpio(12, "out")
+var relay = new Gpio(21, {
+    mode: Gpio.OUTPUT,
+})
+var pwm = new Gpio(12, {
+    mode: Gpio.OUTPUT,
+})
 
-relay.writeSync(1)
+relay.digitalWrite(1)
 
-pwm.writeSync(1)
+pwm.pwmWrite(100)
+
+setTimeout(() => {
+    pwm.pwmWrite(0)
+}, 4000)
 
 const socket = io("https://masterapi.legab.ninja")
 
